@@ -66,8 +66,8 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"]
   # show better error pages
-  gem "better_errors"
-  gem "binding_of_caller" # optional, but recommended
+  gem 'better_errors'
+  gem 'binding_of_caller' # optional, but recommended
 end
 
 group :test do
