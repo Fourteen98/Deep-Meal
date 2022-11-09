@@ -10,4 +10,9 @@ class FoodsController < ApplicationController
       format.html { redirect_to user_foods_path(params[:user_id]), notice: 'Food was successfully destroyed.' }
     end
   end
+
+  def new
+    @food = Food.new
+  end
+
 end

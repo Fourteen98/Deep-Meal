@@ -1,63 +1,56 @@
 <section class="w-full p-8">
-  <div class="w-full p-4">
-    <div class="w-full flex justify-end">
+  <div class="w-full p-4 flex-col flex gap-6">
+    <div class="w-11/12 flex justify-end">
       <button class="px-3 border-2">Add Food</button>
     </div>
-    <div class="flex flex-col w-11/12">
-      <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-          <div class="overflow-hidden">
-            <table class="min-w-full">
-              <thead class="border-b">
-              <tr>
-                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                  #
-                </th>
-                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                  Food
-                </th>
-                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                  Measurement
-                </th>
-                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                  Unit price
-                </th>
-                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                  Quantity
-                </th>
-                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                  Actions
-                </th>
-              </tr>
-              </thead>
-              <tbody>
-                <% @foods.each do |food| %>
-                  <tr class="border-b">
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><%= food.id %></td>
-                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      <%= food.name %>
-                    </td>
-                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      <%= food.measurement_unit %>
-                    </td>
-                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      <%= food.price %>
-                    </td>
-                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      <%= food.quantity %>
-                    </td>
-                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      <%= form_with model: Food, url: user_food_path(food.user_id, food.id), method: :delete do |form| %>
-                        <%= form.submit "Delete", class: "px-3 border-2" %>
-                      <%end %>
-                    </td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-        </div>
+    <div class="flex flex-col w-11/12  px-4">
+      <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th scope="col" class="py-3 px-6">
+              Food
+            </th>
+            <th scope="col" class="py-3 px-6">
+              Measurement Unit
+            </th>
+            <th scope="col" class="py-3 px-6">
+              Unit Price
+            </th>
+            <th scope="col" class="py-3 px-6">
+              Quantity
+            </th>
+            <th scope="col" class="py-3 px-6">
+              Actions
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @foods.each do |food| %>
+            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+              <%= food.name %>
+            </th>
+            <td class="py-4 px-6">
+              <%= food.measurement_unit %>
+            </td>
+            <td class="py-4 px-6">
+              <%= food.price %>
+            </td>
+            <td class="py-4 px-6">
+              <%= food.quantity %>
+            </td>
+            <td class="py-4 px-6">
+              <%= form_with  model: food, url: user_food_path(food.user_id, food.id), method: :delete do |form|%>
+                <%= form.submit "Delete", class: "font-medium text-blue-600 dark:text-blue-500 hover:underline hover:cursor-pointer" %>
+                <%end %>
+            </td>
+          </tr>
+          <% end %>
+          </tbody>
+        </table>
       </div>
+
     </div>
   </div>
 </section>
