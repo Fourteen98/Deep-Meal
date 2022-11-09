@@ -1,0 +1,56 @@
+<section class="w-full p-8">
+  <div class="w-full p-4 flex-col flex gap-6">
+    <div class="w-11/12 flex justify-end">
+    <%= link_to "Add Food", new_user_food_path(@user), class: "inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" %>
+    </div>
+    <div class="flex flex-col w-11/12  px-4">
+      <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th scope="col" class="py-3 px-6">
+              Food
+            </th>
+            <th scope="col" class="py-3 px-6">
+              Measurement Unit
+            </th>
+            <th scope="col" class="py-3 px-6">
+              Unit Price
+            </th>
+            <th scope="col" class="py-3 px-6">
+              Quantity
+            </th>
+            <th scope="col" class="py-3 px-6">
+              Actions
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @foods.each do |food| %>
+            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+              <%= food.name %>
+            </th>
+            <td class="py-4 px-6">
+              <%= food.measurement_unit %>
+            </td>
+            <td class="py-4 px-6">
+              <%= food.price %>
+            </td>
+            <td class="py-4 px-6">
+              <%= food.quantity %>
+            </td>
+            <td class="py-4 px-6">
+              <%= form_with  model: food, url: user_food_path(food.user_id, food.id), method: :delete do |form|%>
+                <%= form.submit "Delete", class: "font-medium text-blue-600 dark:text-blue-500 hover:underline hover:cursor-pointer" %>
+                <%end %>
+            </td>
+          </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</section>
