@@ -1,4 +1,7 @@
-<div>
-  <h1 class="font-bold text-4xl">Users#index</h1>
-  <p>Find me in app/views/users/index.html.erb</p>
-</div>
+<section>
+  <% @users.each do |user| %>
+    <div class="user">
+      <h2><%= user.name %></h2>
+    </div>
+  <% end %>
+</section>

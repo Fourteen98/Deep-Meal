@@ -2,9 +2,9 @@
 
 Rails.application.routes.draw do
   get 'users/index'
-  get 'foods/index'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
+  get 'users/show'
+  root to: 'users#index'
+  resources :users do
+    resources :foods
+  end
 end
