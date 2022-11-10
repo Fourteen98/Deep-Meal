@@ -1,4 +1,21 @@
-<div>
-  <h1 class="font-bold text-4xl">Recipes#index</h1>
-  <p>Find me in app/views/recipes/index.html.erb</p>
-</div>
+<section class="w-full p-8">
+  <div class="w-full p-4 flex-col flex gap-6">
+    <div class="w-11/12 flex justify-end">
+      <%= link_to "Add Food", new_user_recipe_path(@user), class: "inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" %>
+    </div>
+    <%= @recipes.each do |recipe| %>
+      <div>
+        <div>
+          <h2></h2>
+          <%= form_with  model: food, url: user_recipe(recipe.user_id, recipe.id), method: :delete do |form|%>
+            <%= form.submit "Delete", class: "font-medium text-blue-600 dark:text-blue-500 hover:underline hover:cursor-pointer" %>
+          <%end %>
+        </div>
+        <div>
+          <p></p>
+        </div>
+      </div>
+    <%end %>
+
+  </div>
+</section>
