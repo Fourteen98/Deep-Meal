@@ -1,13 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'recipes/index'
-  get 'recipes/show'
-  get 'users/index'
-  get 'users/show'
+  post "users/:user_id/recipes/:id", to: "recipes#toggle"
   root to: 'users#index'
   resources :users do
-    resources :foods, only: [:index, :destroy, :create, :new]
-    resources :recipes, only: [:index, :destroy, :create, :new]
+    resources :foods
+    resources :recipes
   end
 end
