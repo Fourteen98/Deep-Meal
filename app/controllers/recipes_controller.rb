@@ -20,8 +20,6 @@ class RecipesController < ApplicationController
   # def recipe_params
   #   params.require(:recipe).permit(:public)
   # end
-
 end
 
-  # before_action :set_recipe, only: %i[show edit update destroy]
-
+# before_action :set_recipe, only: %i[show edit update destroy]
