@@ -2,8 +2,10 @@
 
 Rails.application.routes.draw do
   devise_for :users
-  post "users/:user_id/recipes/:id", to: "recipes#toggle"
+  # , skip: :all
   root to: 'users#index'
+  post "users/:user_id/recipes/:id", to: "recipes#toggle"
+
   resources :users do
     resources :foods
     resources :recipes
