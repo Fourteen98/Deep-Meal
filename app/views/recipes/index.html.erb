@@ -9,7 +9,7 @@
     <% @recipes.each do |recipe| %>
       <div class="overflow-x-auto relative shadow-md sm:rounded-lg px-4 grid grid-cols-2">
         <div class="flex flex-col gap-4">
-          <h2 class="font-bold text-3xl"><%= recipe.name %></h2>
+          <%= link_to recipe.name, user_recipe_path(current_user, recipe.id), class: "font-bold text-3xl hover:text-darkGrayishBlue" %>
           <%= form_with  model: recipe, url: user_recipe_url(recipe.user_id, recipe.id), method: :delete do |form|%>
             <%= form.submit "REMOVE", class: "font-medium text-blue-600 dark:text-blue-500 hover:underline hover:cursor-pointer text-sm" %>
           <%end %>
