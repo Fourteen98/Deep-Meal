@@ -1,4 +1,5 @@
 class RecipesController < ApplicationController
+  before_action :authenticate_user!
   protect_from_forgery except: [:toggle]
   def index
     @user = User.find(params[:user_id])
