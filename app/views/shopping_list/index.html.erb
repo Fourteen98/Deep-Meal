@@ -1,4 +1,19 @@
-<div>
-  <h1 class="font-bold text-4xl">ShoppingList#index</h1>
-  <p>Find me in app/views/shopping_list/index.html.erb</p>
-</div>
+<p>Amount of food needed to buy: <%= @total_ingredients %> Ingredients</p>
+<p>Total value of food needed: $<%= @total_value %></p>
+
+<table>
+  <tr>
+    <th>Food</th>
+    <th>Quantity</th>
+    <th>Price</th>
+  </tr>
+  <%@missing_foods.each do |ingred|%>
+    <tr>
+      <td><%=ingred.food.name%></td>
+      <td><%= ingred.quantity %> <%= ingred.food.measurement_unit%></td>
+      <td>$<%=ingred.food.price * ingred.quantity  %></td>
+    </tr>
+  <%end%>
+</table>
+
+<%= link_to "Back", :back %>

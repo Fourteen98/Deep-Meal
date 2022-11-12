@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :foods
     resources :recipes do
       resources :recipe_foods
+      resources :shopping_list, only: [ :index ]
     end
     resources :public_recipes
   end
