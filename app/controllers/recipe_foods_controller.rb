@@ -3,11 +3,28 @@ class RecipeFoodsController < ApplicationController
   end
 
   def new
+    @recipe_food = RecipeFood.new
   end
 
   def create
+    @recipe_food = RecipeFood.new(recipe_food_params)
+    @recipe_food.recipe_id = params[:recipe_id]
+    respond_to do |format|
+      if @recipe_food.save
+        format.html { redirect_to user_recipe_path(params[:user_id], @recipe_food.recipe_id), notice: 'Recipe was successfully created.' }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+      end
+    end
   end
 
+
   def destroy
+  end
+
+  private
+
+  def recipe_food_params
+    params.require(:recipe_food).permit(:quantity, :food_id)
   end
 end
