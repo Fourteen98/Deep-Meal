@@ -83,4 +83,5 @@ production:
   <<: *default
   database: Deep_Meal_production
   username: Deep_Meal
-  password: <%= ENV["DEEP_MEAL_DATABASE_PASSWORD"] %>
+  password: <%= ENV["DATABASE_URL"] %>
+#  password: <%= ENV["DEEP_MEAL_DATABASE_PASSWORD"] %>
