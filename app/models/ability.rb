@@ -5,16 +5,15 @@ class Ability
 
   def initialize(current_user)
     can :read, Recipe, public: true
+    can :read, Food, public: true
 
-    return unless current_user.present?
-      can :manage, Recipe, current_user
-      can :manage, Food, current_user
+    return unless current_user.present? # additional permissions for logged in users (they can read their own posts)
 
-
-
-
-    return unless current_user.role == 'admin'
-    can :manage, :all
+    can :read, :all
+    can :manage, User, user: current_user
+    can :manage, Food, user: current_user
+    can :manage, RecipeFood, user: current_user
+    can :manage, Recipe, user: current_user
     # Define abilities for the user here. For example:
     #
     #   return unless user.present?
