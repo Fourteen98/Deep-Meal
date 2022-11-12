@@ -7,8 +7,14 @@ class Ability
     can :read, Recipe, public: true
 
     return unless current_user.present?
-    can :manage, all, current_user
+      can :manage, Recipe, current_user
+      can :manage, Food, current_user
 
+
+
+
+    return unless current_user.role == 'admin'
+    can :manage, :all
     # Define abilities for the user here. For example:
     #
     #   return unless user.present?

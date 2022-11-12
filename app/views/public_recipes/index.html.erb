@@ -6,7 +6,7 @@
     <% @public_recipes.each do |recipe| %>
       <div class="overflow-x-auto relative shadow-md sm:rounded-lg p-4 grid grid-cols-2">
         <div class="flex flex-col gap-4">
-          <div class="font-bold text-3xl hover:text-darkGrayishBlue"><%= recipe.name %></div>
+          <%= link_to recipe.name, user_recipe_path(current_user, recipe.id), class: "font-bold text-3xl hover:text-darkGrayishBlue" %>
           <div class="text-xs">By: <%= recipe.user.name %></div>
         </div>
         <div class="row-span-2">
