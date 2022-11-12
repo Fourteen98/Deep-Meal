@@ -16,7 +16,7 @@ RSpec.describe User, type: :model do
     end
 
     it 'Name length should be lesser than 15 characters' do
-      expect(subject.name).to satisfy { |n| n.length <= 27 }
+      expect(subject.name).to satisfy | n | n.length <= 27
     end
 
     it 'email should return a string' do

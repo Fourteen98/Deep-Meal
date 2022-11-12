@@ -7,5 +7,4 @@ class User < ApplicationRecord
   has_many :recipes, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true, length: { maximum: 27 }
-
 end
