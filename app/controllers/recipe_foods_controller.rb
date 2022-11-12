@@ -31,7 +31,7 @@ class RecipeFoodsController < ApplicationController
   end
 
   def edit
-    @recipe_food = RecipeFood.find(params[:id])  
+    @recipe_food = RecipeFood.find(params[:id])
     p 'i was in edit for recipe_food'
     p @recipe_food
   end
