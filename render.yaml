@@ -1,7 +1,7 @@
 databases:
   - name: deep_meal
     databaseName: deep_meal
-    user: deep-meal
+    user: deep_meal
 
 services:
   - type: web
