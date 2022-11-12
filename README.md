@@ -1,24 +1,41 @@
-# README
+![](https://img.shields.io/badge/Microverse-blueviolet)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+![Ruby](https://img.shields.io/badge/ruby-%23CC342D.svg?style=for-the-badge&logo=ruby&logoColor=white) ![Rails](https://img.shields.io/badge/rails-%23CC0000.svg?style=for-the-badge&logo=ruby-on-rails&logoColor=white)
+![Deep-Meal](app/assets/images/deep_meal.png)
+# Deap-Meal
+A great recipe app created with RoR.
 
-Things you may want to cover:
+## Class diagram for the Database
+![](blog_app_erd.png)
 
-* Ruby version
+## Getting Started
+- Check the Ruby version or if you have at all by running `ruby -v` if you get something like this `ruby 2.6.8p205 (2021-07-07 revision 67951)` you have Ruby installed.
+- Clone the repository by runiing `git clone https://github.com/raminka13/recipe-app.git` in your CLI.
+- `cd recipe-app`
+- Run `bundle install`
+- Run `rails db:create db:migrate`
+- Run `rails server`
+- Open Browser `http://localhost:3000/`
 
-* System dependencies
+## Testing
+- Run `rspec spec/`
 
-* Configuration
+## Authors
+👤 **Muhyideen Elias**
+- GitHub: [fourteen98](https://github.com/Fourteen98/)
+- Twitter: [muhiydeen](https://twitter.com/muhiydeen)
+- Linkedin: [muhyideen-elias](https://www.linkedin.com/in/muhyideen-elias-53719994/)
 
-* Database creation
+## 🤝 Contributing
 
-* Database initialization
+Contributions, issues, and feature requests are welcome!
 
-* How to run the test suite
+Feel free to check the [issues page](https://github.com/raminka13/recipe-app/issues).
 
-* Services (job queues, cache servers, search engines, etc.)
+## Show your support
 
-* Deployment instructions
+Give a ⭐️ if you like this project!
 
-* ...
+## 📝 License
+
+This project is [MIT](./MIT.md) licensed.
