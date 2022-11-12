@@ -1,8 +1,8 @@
 class FoodsController < ApplicationController
   before_action :authenticate_user!
   def index
-    @foods = Food.all
     @user = User.find(params[:user_id])
+    @foods = Food.all.where(user_id: current_user)
   end
 
   def destroy
