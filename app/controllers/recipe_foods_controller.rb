@@ -1,6 +1,5 @@
 class RecipeFoodsController < ApplicationController
-  def index
-  end
+  def index; end
 
   def new
     @recipe_food = RecipeFood.new
@@ -11,19 +10,23 @@ class RecipeFoodsController < ApplicationController
     @recipe_food.recipe_id = params[:recipe_id]
     respond_to do |format|
       if @recipe_food.save
-        format.html { redirect_to user_recipe_path(params[:user_id], @recipe_food.recipe_id), notice: 'Recipe was successfully created.' }
+        format.html do
+          redirect_to user_recipe_path(params[:user_id], @recipe_food.recipe_id),
+                      notice: 'Recipe was successfully created.'
+        end
       else
         format.html { render :new, status: :unprocessable_entity }
       end
     end
   end
 
-
   def destroy
     @recipe_food = RecipeFood.find_by(id: params[:id])
     @recipe_food.destroy
     respond_to do |format|
-      format.html { redirect_to user_recipe_path(params[:user_id]), notice: 'Recipe Ingredient was successfully destroyed.' }
+      format.html do
+        redirect_to user_recipe_path(params[:user_id]), notice: 'Recipe Ingredient was successfully destroyed.'
+      end
     end
   end
 
@@ -38,12 +41,13 @@ class RecipeFoodsController < ApplicationController
     @recipe_food = RecipeFood.find(params[:id])
     if @recipe_food.update(recipe_food_params)
       p recipe_food_params
-      format.html { redirect_to user_recipe_path(params[:user_id], params[:id]), notice: 'Recipe was successfully created.' }
+      format.html do
+        redirect_to user_recipe_path(params[:user_id], params[:id]), notice: 'Recipe was successfully created.'
+      end
     else
       format.html { render :new, status: :unprocessable_entity }
     end
   end
-
 
   private
 

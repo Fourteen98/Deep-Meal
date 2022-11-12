@@ -11,6 +11,5 @@ class ShoppingListController < ApplicationController
       # @total_ingredients += 1
       @missing_foods << ingredient
     end
-
   end
 end
