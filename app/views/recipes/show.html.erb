@@ -21,15 +21,63 @@
           <p>Steps goes here ...</p>
         </div>
         <div class="flex justify-between py-2 border-b-2 border-grey-600">
-          <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Generate shopping list</button>
-          <%= link_to "Add ingredient", new_user_food_path(@user), class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
+          <%= link_to "Generate Shopping List", user_recipe_shopping_list_index_path(@user, @recipe), class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
+          <%= link_to "Add ingredient", new_user_recipe_recipe_food_path(@user, @recipe), class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
         </div>
 
-      </div>
-      <div>
+        <div class="w-full p-4 flex-col flex gap-6">
+          <div class="w-11/12 flex justify-end">
+            <%#= link_to "Add Food", new_user_food_path(@user), class: "inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" %>
+          </div>
+          <div class="flex flex-col w-11/12  px-4">
+            <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+              <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                  <th scope="col" class="py-3 px-6">
+                    Food
+                  </th>
+                  <th scope="col" class="py-3 px-6">
+                    Quantity
+                  </th>
+                  <th scope="col" class="py-3 px-6">
+                    Value($)
+                  </th>
+                  <th scope="col" class="py-3 px-6">
+                    Actions
+                  </th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @recipe_foods.each do |ingredient| %>
+                  <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                    <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                      <%= ingredient.food.name %>
+                    </th>
+                    <td class="py-4 px-6">
+                      <%= ingredient.quantity %>
+                    </td>
+                    <td class="py-4 px-6">
+                      <%= ingredient.food.price * ingredient.quantity %>
+                    </td>
+                    <td class="py-4 px-6 flex gap-4 ">
+                      <%= form_with  model: @recipe_foods, url: user_recipe_recipe_food_path(current_user.id, @recipe.id, ingredient.id), method: :delete do |form|%>
+                        <%= form.submit "Delete", class: "font-medium text-blue-600 dark:text-blue-500 hover:underline hover:cursor-pointer" %>
+                      <%end %>
 
-      </div>
+                      <%= link_to  "Modify", edit_user_recipe_recipe_food_path(current_user.id, @recipe.id, ingredient.id), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline hover:cursor-pointer" %>
 
+                    </td>
+                  </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+

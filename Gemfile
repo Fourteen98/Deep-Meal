@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
+# devise for authentication
+gem 'devise'
+
 # add rubocop
 gem 'rubocop', '>= 1.0', '< 2.0'
 
