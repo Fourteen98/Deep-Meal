@@ -9,6 +9,8 @@ class RecipesController < ApplicationController
   def show
     @user = User.find(params[:user_id])
     @recipe = Recipe.find(params[:id])
+    @recipe_foods = RecipeFood.includes(:food, :recipe).where(recipe_id: @recipe.id).order(created_at: :desc)
+    p @recipe_foods
   end
 
   def toggle

@@ -20,6 +20,11 @@ class RecipeFoodsController < ApplicationController
 
 
   def destroy
+    @recipe_food = RecipeFood.find_by(id: params[:id])
+    @recipe_food.destroy
+    respond_to do |format|
+      format.html { redirect_to user_recipe_path(params[:user_id]), notice: 'Recipe Ingredient was successfully destroyed.' }
+    end
   end
 
   private
