@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'shopping_list/index'
+  get 'shopping_list/n'
   get 'recipe_foods/index'
   get 'recipe_foods/new'
   get 'recipe_foods/create'

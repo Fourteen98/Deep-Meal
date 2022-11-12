@@ -64,9 +64,9 @@
                       <%= form_with  model: @recipe_foods, url: user_recipe_recipe_food_path(current_user.id, @recipe.id, ingredient.id), method: :delete do |form|%>
                         <%= form.submit "Delete", class: "font-medium text-blue-600 dark:text-blue-500 hover:underline hover:cursor-pointer" %>
                       <%end %>
-                      <%= form_with  model: @recipe_foods, url: user_recipe_recipe_food_path(current_user.id, @recipe.id, ingredient.id), method: :delete do |form|%>
-                        <%= form.submit "Modify", class: "font-medium text-blue-600 dark:text-blue-500 hover:underline hover:cursor-pointer" %>
-                      <%end %>
+
+                      <%= link_to  "Modify", edit_user_recipe_recipe_food_path(current_user.id, @recipe.id, ingredient.id), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline hover:cursor-pointer" %>
+
                     </td>
                   </tr>
                 <% end %>

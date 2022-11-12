@@ -27,9 +27,27 @@ class RecipeFoodsController < ApplicationController
     end
   end
 
+  def edit
+    @recipe_food = RecipeFood.find(params[:id])
+    p 'i was in edit for recipe_food'
+    p @recipe_food
+  end
+
+  def update
+    p 'i was in update for recipe_food'
+    @recipe_food = RecipeFood.find(params[:id])
+    if @recipe_food.update(recipe_food_params)
+      p recipe_food_params
+      format.html { redirect_to user_recipe_path(params[:user_id], params[:id]), notice: 'Recipe was successfully created.' }
+    else
+      format.html { render :new, status: :unprocessable_entity }
+    end
+  end
+
+
   private
 
   def recipe_food_params
-    params.require(:recipe_food).permit(:quantity, :food_id)
+    params.require(:recipe_food).permit(:quantity, :food_id, :recipe_id)
   end
 end
