@@ -8,23 +8,27 @@
           <div class="flex justify-between">
             <h2 class="text-xl">Preparation Time: <%= @recipe.preparation_time %> hour(s)</h2>
             <%= form_with model: @recipe, url: user_recipe_url(@recipe.user_id, @recipe.id), class: "inline-flex relative items-center cursor-pointer",  method: :toggle do |form| %>
-              <label for="default-toggle" class="inline-flex relative items-center cursor-pointer">
-                <% if @recipe.public %>
-                <%end %>
-                <%= form.check_box :public, class:"sr-only peer", id:"default-toggle", :onclick => "this.form.submit()"%>
-                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                <span class="ml-3 text-xl font-medium text-gray-900 dark:text-gray-300">Public</span>
-              </label>
+              <% if can? :manage, @recipe %>
+                <label for="default-toggle" class="inline-flex relative items-center cursor-pointer">
+                  <% if @recipe.public %>
+                  <%end %>
+                  <%= form.check_box :public, class:"sr-only peer", id:"default-toggle", :onclick => "this.form.submit()"%>
+                  <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                  <span class="ml-3 text-xl font-medium text-gray-900 dark:text-gray-300">Public</span>
+                </label>
+              <%end %>
           <%end %>
           </div>
           <h2 class="text-xl">Cooking Time: <%= @recipe.cooking_time %> hour(s)</h2>
           <p>Steps goes here ...</p>
         </div>
-        <div class="flex justify-between py-2 border-b-2 border-grey-600">
-          <%= link_to "Generate Shopping List", user_recipe_shopping_list_index_path(@user, @recipe), class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
-          <%= link_to "Add ingredient", new_user_recipe_recipe_food_path(@user, @recipe), class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
-        </div>
 
+        <% if can? :manage, @recipe %>
+          <div class="flex justify-between py-2 border-b-2 border-grey-600">
+            <%= link_to "Generate Shopping List", user_recipe_shopping_list_index_path(@user, @recipe), class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
+            <%= link_to "Add ingredient", new_user_recipe_recipe_food_path(@user, @recipe), class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
+          </div>
+        <% end %>
         <div class="w-full p-4 flex-col flex gap-6">
           <div class="w-11/12 flex justify-end">
             <%#= link_to "Add Food", new_user_food_path(@user), class: "inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" %>
@@ -58,15 +62,16 @@
                       <%= ingredient.quantity %>
                     </td>
                     <td class="py-4 px-6">
-                      <%= ingredient.food.price * ingredient.quantity %>
+                      <%= ingredient.food.price.to_i * ingredient.quantity.to_i    %>
                     </td>
                     <td class="py-4 px-6 flex gap-4 ">
-                      <%= form_with  model: @recipe_foods, url: user_recipe_recipe_food_path(current_user.id, @recipe.id, ingredient.id), method: :delete do |form|%>
-                        <%= form.submit "Delete", class: "font-medium text-blue-600 dark:text-blue-500 hover:underline hover:cursor-pointer" %>
+                      <% if can? :manage, @recipe %>
+                        <%= form_with  model: @recipe_foods, url: user_recipe_recipe_food_path(current_user.id, @recipe.id, ingredient.id), method: :delete do |form|%>
+                          <%= form.submit "Delete", class: "font-medium text-blue-600 dark:text-blue-500 hover:underline hover:cursor-pointer" %>
+                        <%end %>
+
+                        <%= link_to  "Modify", edit_user_recipe_recipe_food_path(current_user.id, @recipe.id, ingredient.id), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline hover:cursor-pointer" %>
                       <%end %>
-
-                      <%= link_to  "Modify", edit_user_recipe_recipe_food_path(current_user.id, @recipe.id, ingredient.id), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline hover:cursor-pointer" %>
-
                     </td>
                   </tr>
                 <% end %>

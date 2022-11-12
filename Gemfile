@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
+# cancancan for authorization
+gem 'cancancan'
+
 # devise for authentication
 gem 'devise'
 
